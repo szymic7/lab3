@@ -1,58 +1,176 @@
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class Lab3JFrame implements ActionListener {
+public class Lab3JFrame {
     private JFrame jframe;
     private JPanel jpanel;
-    private JTextField textField;
-    private JPasswordField passwordField;
-    private JLabel textFieldLabel;
-    private JLabel passwordFieldLabel;
-    private JButton button;
+    private JTextField login, imie;
+    private JPasswordField password;
+    private JLabel textFieldLabel, passwordFieldLabel, imieTextLabel;
+    private JButton button, button1, button2, button3, button4, ok;
     private JTextArea textArea;
-    String user;
-    char[] password;
-    String stringPassword;
+    public String user, stringPassword;
+    public char[] passwordArray;
+    public int choice, textAreaLoc;
+    public String[] kolory = {"Niebieski", "Zielony", "Pomaranczowy"};
+    public Font font = new Font("Arial", Font.BOLD, 12);
+    public Font font1 = new Font("Arial", Font.PLAIN, 16);
 
     public Lab3JFrame() {
 
-        jframe = new JFrame("Logowanie");
-        jframe.setSize(500, 500);
+        // JFrame
+        jframe = new JFrame("Zadania 1 i 2 - Logowanie");
+        jframe.setSize(700, 700);
         jframe.setLocationRelativeTo(null);
         jframe.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
+        // JPanel
         jpanel = new JPanel();
         jframe.add(jpanel);
         jpanel.setLayout(null);
 
-        textFieldLabel = new JLabel("Login: ");
-        textFieldLabel.setBounds(70, 30, 80, 25);
+        // label - Login
+        textFieldLabel = new JLabel("   Login: ");
+        textFieldLabel.setBounds(150, 30, 100, 30);
+        textFieldLabel.setFont(font1);
         jpanel.add(textFieldLabel);
 
-        textField = new JTextField(20);
-        textField.setBounds(170, 30, 150, 25);
-        jpanel.add(textField);
+        // textField - Login
+        login = new JTextField(20);
+        login.setBounds(250, 30, 150, 30);
+        jpanel.add(login);
 
+        // label - Password
         passwordFieldLabel = new JLabel("Password: ");
-        passwordFieldLabel.setBounds(70, 60, 80, 25);
+        passwordFieldLabel.setBounds(150, 70, 100, 30);
+        passwordFieldLabel.setFont(font1);
         jpanel.add(passwordFieldLabel);
 
-        passwordField = new JPasswordField(15);
-        passwordField.setBounds(170, 60, 150, 25);
-        jpanel.add(passwordField);
+        // passwordField
+        password = new JPasswordField(20);
+        password.setBounds(250, 70, 150, 30);
+        jpanel.add(password);
 
+        // button - Log in
         button = new JButton("Log in");
-        button.setBounds(340, 60, 100, 25);
-        button.addActionListener(this);
+        button.setBounds(420, 70, 100, 30);
+        button.setFont(font);
+        button.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                user = login.getText();
+                passwordArray = password.getPassword();
+                stringPassword = new String(passwordArray);
+
+                if(user.equals("marek") && stringPassword.equals("haslo"))
+                    textArea.setText("\n Wprowadzone dane:\n Login: " + user + "\n Haslo: " + stringPassword + "\n\n Logowanie udane.");
+                else
+                    textArea.setText("\n Wprowadzone dane:\n Login: " + user + "\n Haslo: " + stringPassword + "\n\n Logowanie nieudane.");
+            }
+        });
         jpanel.add(button);
 
+        // textArea - dane uzytkownika
         textArea = new JTextArea("");
-        textArea.setBounds(140, 130, 200, 120);
+        textArea.setBounds(150, 150, 220, 150);
+        textAreaLoc = 0;
+        textArea.setFont(font1);
+        textArea.setEditable(false);
         jpanel.add(textArea);
 
-        //jframe.getContentPane().add(textField, BorderLayout.CENTER);
-        //jframe.pack();
+        // button1 - powiekszanie przycisku
+        button1 = new JButton("Powieksz przycisk 'Log in'");
+        button1.setFont(font);
+        button1.setBounds(30, 450, 200, 50);
+        jpanel.add(button1);
+        button1.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                button.setBounds(420, 30, 200, 70);
+                button.setFont(new Font("Arial", Font.BOLD, 20));
+            }
+        });
+
+        // button2 - przesuwanie pola tekstowego
+        button2 = new JButton("Przesun pole tekstowe");
+        button2.setFont(font);
+        button2.setBounds(250, 450, 200, 50);
+        jpanel.add(button2);
+        button2.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (textAreaLoc == 0) {
+                    textArea.setBounds(150, 250, 220, 150);
+                    textAreaLoc = 1;
+                } else if (textAreaLoc == 1) {
+                    textArea.setBounds(150, 150, 220, 150);
+                    textAreaLoc = 0;
+                }
+            }
+        });
+
+        // button3 - zmiana koloru tla
+        button3 = new JButton("Zmien kolor tla");
+        button3.setFont(font);
+        button3.setBounds(470, 450, 200, 50);
+        jpanel.add(button3);
+        button3.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                choice = JOptionPane.showOptionDialog(jframe, "Na jaki kolor chcesz zmienić tlo okienka aplikacji?", "Zmien kolor",
+                        JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, kolory, null);
+                if (choice == 0) { // niebieski
+                    jpanel.setBackground(Color.CYAN);
+                } else if (choice == 1) { // zielony
+                    jpanel.setBackground(Color.GREEN);
+                } else if (choice == 2) { // pomaranczowy
+                    jpanel.setBackground(Color.ORANGE);
+                }
+            }
+        });
+
+        button4 = new JButton("Przejdz do zadania 3");
+        button4.setFont(font);
+        button4.setBounds(470, 570, 200, 50);
+        jpanel.add(button4);
+        button4.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                jpanel.removeAll();
+                jpanel.updateUI();
+
+                // ustawienie nowego tytulu JFrame
+                jframe.setTitle("Zadanie 3 - Poznajmy sie");
+
+                // label - Podaj swoje imie
+                imieTextLabel = new JLabel("Podaj swoje imie:");
+                imieTextLabel.setFont(font1);
+                imieTextLabel.setBounds(120, 200, 150, 50);
+                jpanel.add(imieTextLabel);
+
+                // textField - imie
+                imie = new JTextField(20);
+                imie.setFont(font1);
+                imie.setBounds(270, 200, 200, 50);
+                jpanel.add(imie);
+
+                // button - OK
+                ok = new JButton("OK");
+                ok.setFont(font1);
+                ok.setBounds(480, 200, 100, 50);
+                jpanel.add(ok);
+                ok.addActionListener(new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        UIManager.put("OptionPane.messageFont", new Font("Arial", Font.PLAIN, 14));
+                        JOptionPane.showMessageDialog(jframe, "Cześć " + imie.getText() + ", milo cie poznac!", "Witaj!", JOptionPane.PLAIN_MESSAGE);
+                    }
+                });
+            }
+        });
+
     }
 
     public static void main(String[] args) {
@@ -68,15 +186,4 @@ public class Lab3JFrame implements ActionListener {
         return this.jframe;
     }
 
-    @Override
-    public void actionPerformed(ActionEvent e){
-        user = textField.getText();
-        password = passwordField.getPassword();
-        stringPassword = new String(password);
-
-        if(user.equals("marek") && stringPassword.equals("haslo"))
-            textArea.setText("\n Wprowadzone dane:\n Login: " + user + "\n Haslo: " + stringPassword + "\n\n Logowanie udane.");
-        else
-            textArea.setText("\n Wprowadzone dane:\n Login: " + user + "\n Haslo: " + stringPassword + "\n\n Logowanie nieudane.");
-    }
 }
