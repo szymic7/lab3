@@ -20,6 +20,10 @@ public class Lab3JFrame {
 
     public Lab3JFrame() {
 
+        // Zmiana czcionki dla wszystkich wiadomosci, ktore beda wyswietlane w JOptionPane
+        UIManager.put("OptionPane.messageFont", new Font("Arial", Font.PLAIN, 14));
+
+
         // JFrame
         jframe = new JFrame("Zadania 1, 2, 5 - Logowanie i sprawdzanie sily hasla");
         jframe.setSize(700, 700);
@@ -79,7 +83,7 @@ public class Lab3JFrame {
         jpanel.add(button);
 
 
-        // sprawdzHaslo (button) - sprwdzanie sily hasla
+        // sprawdzHaslo (button) - sprawdzanie sily hasla
         sprawdzHaslo = new JButton("Sprawdz sile hasla");
         sprawdzHaslo.setBounds(420, 70, 150, 30);
         sprawdzHaslo.setFont(font);
@@ -103,13 +107,13 @@ public class Lab3JFrame {
                 // c) przynajmniej 1 znak specjalny d) dlugosc hasla >= 10 znakow. Im wiecej warunkow spelnionych tym wyzszy
                 // 'wspolczynnik sily hasla', a co za tym idzie - silniejsze haslo
 
-                if(duzeLitery>0)
+                if(duzeLitery > 0)
                     silaHasla++;
-                if(znakiSpecjalne>0)
+                if(znakiSpecjalne > 0)
                     silaHasla++;
-                if(cyfry>0)
+                if(cyfry > 0)
                     silaHasla++;
-                if(stringPassword.length()>=10)
+                if(stringPassword.length() >= 10)
                     silaHasla++;
 
                 switch(silaHasla){
@@ -238,7 +242,6 @@ public class Lab3JFrame {
                 ok.addActionListener(new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
-                        UIManager.put("OptionPane.messageFont", new Font("Arial", Font.PLAIN, 14));
                         JOptionPane.showMessageDialog(jframe, "Cześć " + imie.getText() + ", milo cie poznac!", "Witaj!", JOptionPane.PLAIN_MESSAGE);
                     }
                 });
