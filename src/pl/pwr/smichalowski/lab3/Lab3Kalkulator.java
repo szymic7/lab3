@@ -64,6 +64,7 @@ public class Lab3Kalkulator {
         frame.add(panel);
         panel.setLayout(null);
 
+
         // textField - wynik
         wynik = new JTextField("0", 15);
         wynik.setBounds(110, 40, 280, 60);
@@ -71,6 +72,7 @@ public class Lab3Kalkulator {
         wynik.setBackground(Color.WHITE);
         wynik.setEditable(false);
         panel.add(wynik);
+
 
         // b1 - '1'
         b1 = new JButton("1");
@@ -80,6 +82,7 @@ public class Lab3Kalkulator {
         panel.add(b1);
         b1.addActionListener(przyciskCyfry);
 
+
         // b2 - '2'
         b2 = new JButton("2");
         b2.setBounds(185, 150, 60, 60);
@@ -87,6 +90,7 @@ public class Lab3Kalkulator {
         b2.setBackground(lightGreen);
         panel.add(b2);
         b2.addActionListener(przyciskCyfry);
+
 
         // b3 - '3'
         b3 = new JButton("3");
@@ -96,6 +100,7 @@ public class Lab3Kalkulator {
         panel.add(b3);
         b3.addActionListener(przyciskCyfry);
 
+
         // b4 - '4'
         b4 = new JButton("4");
         b4.setBounds(115, 220, 60, 60);
@@ -103,6 +108,7 @@ public class Lab3Kalkulator {
         b4.setBackground(lightGreen);
         panel.add(b4);
         b4.addActionListener(przyciskCyfry);
+
 
         // b5 - '5'
         b5 = new JButton("5");
@@ -112,6 +118,7 @@ public class Lab3Kalkulator {
         panel.add(b5);
         b5.addActionListener(przyciskCyfry);
 
+
         // b6 - '6'
         b6 = new JButton("6");
         b6.setBounds(255, 220, 60, 60);
@@ -119,6 +126,7 @@ public class Lab3Kalkulator {
         b6.setBackground(lightGreen);
         panel.add(b6);
         b6.addActionListener(przyciskCyfry);
+
 
         // b7 - '7'
         b7 = new JButton("7");
@@ -128,6 +136,7 @@ public class Lab3Kalkulator {
         panel.add(b7);
         b7.addActionListener(przyciskCyfry);
 
+
         // b8 - '8'
         b8 = new JButton("8");
         b8.setBounds(185, 290, 60, 60);
@@ -135,6 +144,7 @@ public class Lab3Kalkulator {
         b8.setBackground(lightGreen);
         panel.add(b8);
         b8.addActionListener(przyciskCyfry);
+
 
         // b9 - '9'
         b9 = new JButton("9");
@@ -144,6 +154,7 @@ public class Lab3Kalkulator {
         panel.add(b9);
         b9.addActionListener(przyciskCyfry);
 
+
         // b0 - '0'
         b0 = new JButton("0");
         b0.setBounds(115, 360, 130, 60);
@@ -151,6 +162,43 @@ public class Lab3Kalkulator {
         b0.setBackground(lightGreen);
         panel.add(b0);
         b0.addActionListener(przyciskCyfry);
+
+
+        // plus - '+'
+        plus = new JButton("+");
+        plus.setBounds(325, 150, 60, 60);
+        plus.setFont(font);
+        plus.setBackground(green);
+        panel.add(plus);
+        plus.addActionListener(przyciskOperatory);
+
+
+        // minus - '-'
+        minus = new JButton("-");
+        minus.setBounds(325, 220, 60, 60);
+        minus.setFont(font);
+        minus.setBackground(green);
+        panel.add(minus);
+        minus.addActionListener(przyciskOperatory);
+
+
+        // mnozenie - '*'
+        mnozenie = new JButton("*");
+        mnozenie.setBounds(325, 290, 60, 60);
+        mnozenie.setFont(font);
+        mnozenie.setBackground(green);
+        panel.add(mnozenie);
+        mnozenie.addActionListener(przyciskOperatory);
+
+
+        // dzielenie - '/'
+        dzielenie = new JButton("/");
+        dzielenie.setBounds(325, 360, 60, 60);
+        dzielenie.setFont(font);
+        dzielenie.setBackground(green);
+        panel.add(dzielenie);
+        dzielenie.addActionListener(przyciskOperatory);
+
 
         // rownaSie - '='
         rownaSie = new JButton("=");
@@ -186,39 +234,12 @@ public class Lab3Kalkulator {
             }
         });
 
-        // plus - '+'
-        plus = new JButton("+");
-        plus.setBounds(325, 150, 60, 60);
-        plus.setFont(font);
-        plus.setBackground(green);
-        panel.add(plus);
-        plus.addActionListener(przyciskOperatory);
-
-        // minus - '-'
-        minus = new JButton("-");
-        minus.setBounds(325, 220, 60, 60);
-        minus.setFont(font);
-        minus.setBackground(green);
-        panel.add(minus);
-        minus.addActionListener(przyciskOperatory);
-
-        // mnozenie - '*'
-        mnozenie = new JButton("*");
-        mnozenie.setBounds(325, 290, 60, 60);
-        mnozenie.setFont(font);
-        mnozenie.setBackground(green);
-        panel.add(mnozenie);
-        mnozenie.addActionListener(przyciskOperatory);
-
-        // dzielenie - '/'
-        dzielenie = new JButton("/");
-        dzielenie.setBounds(325, 360, 60, 60);
-        dzielenie.setFont(font);
-        dzielenie.setBackground(green);
-        panel.add(dzielenie);
-        dzielenie.addActionListener(przyciskOperatory);
-
     }
+
+    public JFrame getFrame() {
+        return this.frame;
+    }
+
     public static void main(String[] args) {
         SwingUtilities.invokeLater(new Runnable() {
             @Override
@@ -226,9 +247,5 @@ public class Lab3Kalkulator {
                 new Lab3Kalkulator().getFrame().setVisible(true);
             }
         });
-    }
-
-    public JFrame getFrame() {
-        return this.frame;
     }
 }
