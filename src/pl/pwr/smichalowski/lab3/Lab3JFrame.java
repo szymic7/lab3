@@ -1,3 +1,5 @@
+package pl.pwr.smichalowski.lab3;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
