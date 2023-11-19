@@ -4,6 +4,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Arrays;
 
 public class Lab3JFrame {
     private JFrame jframe;
@@ -11,10 +12,10 @@ public class Lab3JFrame {
     private JTextField login, imie;
     private JPasswordField password;
     private JLabel textFieldLabel, passwordFieldLabel, imieTextLabel;
-    private JButton button, sprawdzHaslo, button1, button2, button3, button4, ok;
+    private JButton button, sprawdzHaslo, button1, button2, button3, zadanie3, ok;
     private JTextArea textArea;
-    public String user, stringPassword;
-    public char[] passwordArray;
+    public String user;
+    public char[] passwordArray, correctPassword = {'h', 'a', 's', 'l', 'o'};
     public int choice, textAreaLoc, duzeLitery = 0, cyfry = 0, znakiSpecjalne = 0, silaHasla = 0;
     public String[] kolory = {"Niebieski", "Zielony", "Pomaranczowy"};
     public Font font = new Font("Arial", Font.BOLD, 12);
@@ -74,12 +75,11 @@ public class Lab3JFrame {
             public void actionPerformed(ActionEvent e) {
                 user = login.getText();
                 passwordArray = password.getPassword();
-                stringPassword = new String(passwordArray);
 
-                if(user.equals("marek") && stringPassword.equals("haslo"))
-                    textArea.setText("\n Wprowadzone dane:\n Login: " + user + "\n Haslo: " + stringPassword + "\n\n Logowanie udane.");
-                else
-                    textArea.setText("\n Wprowadzone dane:\n Login: " + user + "\n Haslo: " + stringPassword + "\n\n Logowanie nieudane.");
+                if(user.equals("marek") && Arrays.equals(passwordArray, correctPassword)) {
+                    textArea.setText("\n Wprowadzone dane:\n Login: " + user + "\n Haslo: " + String.valueOf(passwordArray) + "\n\n Logowanie udane.");
+                } else
+                    textArea.setText("\n Wprowadzone dane:\n Login: " + user + "\n Haslo: " + String.valueOf(passwordArray) + "\n\n Logowanie nieudane.");
             }
         });
         jpanel.add(button);
@@ -94,7 +94,6 @@ public class Lab3JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 passwordArray = password.getPassword();
-                stringPassword = new String(passwordArray);
 
                 for(char znak : passwordArray){
                     if(znak >= 'A' && znak <= 'Z')
@@ -107,7 +106,7 @@ public class Lab3JFrame {
 
                 // Czynniki wplywajace na 'wspolczynnik sily hasla' a) przynajmniej 1 wielka litera, b) przynajmniej 1 cyfra,
                 // c) przynajmniej 1 znak specjalny d) dlugosc hasla >= 10 znakow. Im wiecej warunkow spelnionych tym wyzszy
-                // 'wspolczynnik sily hasla', a co za tym idzie - silniejsze haslo
+                // 'wspolczynnik sily hasla', a więc silniejsze haslo
 
                 if(duzeLitery > 0)
                     silaHasla++;
@@ -115,24 +114,24 @@ public class Lab3JFrame {
                     silaHasla++;
                 if(cyfry > 0)
                     silaHasla++;
-                if(stringPassword.length() >= 10)
+                if(passwordArray.length >= 10)
                     silaHasla++;
 
                 switch(silaHasla){
                     case 0:
-                        JOptionPane.showMessageDialog(jframe, "Wprowadzone haslo: " + stringPassword + "\nSila hasla: bardzo slabe", "Sila hasla", JOptionPane.PLAIN_MESSAGE);
+                        JOptionPane.showMessageDialog(jframe, "Wprowadzone haslo: " + String.valueOf(passwordArray) + "\nSila hasla: bardzo slabe", "Sila hasla", JOptionPane.PLAIN_MESSAGE);
                         break;
                     case 1:
-                        JOptionPane.showMessageDialog(jframe, "Wprowadzone haslo: " + stringPassword + "\nSila hasla: slabe", "Sila hasla", JOptionPane.PLAIN_MESSAGE);
+                        JOptionPane.showMessageDialog(jframe, "Wprowadzone haslo: " + String.valueOf(passwordArray) + "\nSila hasla: slabe", "Sila hasla", JOptionPane.PLAIN_MESSAGE);
                         break;
                     case 2:
-                        JOptionPane.showMessageDialog(jframe, "Wprowadzone haslo: " + stringPassword + "\nSila hasla: srednie", "Sila hasla", JOptionPane.PLAIN_MESSAGE);
+                        JOptionPane.showMessageDialog(jframe, "Wprowadzone haslo: " + String.valueOf(passwordArray) + "\nSila hasla: srednie", "Sila hasla", JOptionPane.PLAIN_MESSAGE);
                         break;
                     case 3:
-                        JOptionPane.showMessageDialog(jframe, "Wprowadzone haslo: " + stringPassword + "\nSila hasla: silne", "Sila hasla", JOptionPane.PLAIN_MESSAGE);
+                        JOptionPane.showMessageDialog(jframe, "Wprowadzone haslo: " + String.valueOf(passwordArray) + "\nSila hasla: silne", "Sila hasla", JOptionPane.PLAIN_MESSAGE);
                         break;
                     case 4:
-                        JOptionPane.showMessageDialog(jframe, "Wprowadzone haslo: " + stringPassword + "\nSila hasla: bardzo silne", "Sila hasla", JOptionPane.PLAIN_MESSAGE);
+                        JOptionPane.showMessageDialog(jframe, "Wprowadzone haslo: " + String.valueOf(passwordArray) + "\nSila hasla: bardzo silne", "Sila hasla", JOptionPane.PLAIN_MESSAGE);
                         break;
                     default:
                         JOptionPane.showMessageDialog(jframe, "Sprawdzanie sily hasla zakonczone bledem. \nSprobuj ponownie.", "Sila hasla", JOptionPane.ERROR_MESSAGE);
@@ -210,19 +209,22 @@ public class Lab3JFrame {
         });
 
 
-        // button4 - przejdz do zadania 3
-        button4 = new JButton("Przejdz do zadania 3");
-        button4.setFont(font);
-        button4.setBounds(470, 580, 200, 50);
-        jpanel.add(button4);
-        button4.addActionListener(new ActionListener() {
+        // zadanie3 (button) - przejdz do zadania 3
+        zadanie3 = new JButton("Przejdz do zadania 3");
+        zadanie3.setFont(font);
+        zadanie3.setBounds(470, 580, 200, 50);
+        jpanel.add(zadanie3);
+        zadanie3.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+
                 jpanel.removeAll();
                 jpanel.updateUI();
 
+
                 // ustawienie nowego tytulu JFrame
                 jframe.setTitle("Zadanie 3 - Poznajmy sie");
+
 
                 // label - Podaj swoje imie
                 imieTextLabel = new JLabel("Podaj swoje imie:");
@@ -230,11 +232,13 @@ public class Lab3JFrame {
                 imieTextLabel.setBounds(120, 200, 150, 50);
                 jpanel.add(imieTextLabel);
 
+
                 // textField - imie
                 imie = new JTextField(20);
                 imie.setFont(font1);
                 imie.setBounds(270, 200, 200, 50);
                 jpanel.add(imie);
+
 
                 // button - OK
                 ok = new JButton("OK");
@@ -250,7 +254,13 @@ public class Lab3JFrame {
             }
         });
 
+    } // koniec konstruktora obiektu klasy Lab3JFrame
+
+
+    public JFrame getJFrame() {
+        return this.jframe;
     }
+
 
     public static void main(String[] args) {
         SwingUtilities.invokeLater(new Runnable() {
@@ -259,10 +269,6 @@ public class Lab3JFrame {
                 new Lab3JFrame().getJFrame().setVisible(true);
             }
         });
-    }
-
-    public JFrame getJFrame() {
-        return this.jframe;
     }
 
 }

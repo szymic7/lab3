@@ -9,7 +9,8 @@ public class Lab3Kalkulator {
     private JFrame frame;
     private JPanel panel;
     private JTextField wynik;
-    private JButton b0, b1, b2, b3, b4, b5, b6, b7, b8, b9, plus, minus, mnozenie, dzielenie, rownaSie, button;
+    private JButton[] buttons = new JButton[10], operators = new JButton[4];
+    private JButton rownaSie, button;
     public Font font = new Font("Arial", Font.BOLD, 24);
     public Font fontWynik = new Font("Arial", Font.BOLD, 30);
     Color lightGreen = new Color(155, 199, 159);
@@ -17,7 +18,11 @@ public class Lab3Kalkulator {
     Color darkGreen = new Color(32, 115, 40);
     public long l1 = 0L, l2 = 0L;
     public int operatorPressed = 0, counted = 0;
+    public int[] xCords = {115, 115, 185, 255, 115, 185, 255, 115, 185, 255};
+    public char[] operatory = {'+', '-', '*', '/'};
     public String operator;
+
+
     ActionListener przyciskCyfry = new ActionListener() {
         @Override
         public void actionPerformed(ActionEvent e) {
@@ -33,7 +38,9 @@ public class Lab3Kalkulator {
                 }
             }
         }
-    };
+    }; // ActionListener dla wszystkich przyciskow cyfr
+
+
     ActionListener przyciskOperatory = new ActionListener() {
         @Override
         public void actionPerformed(ActionEvent e) {
@@ -47,7 +54,7 @@ public class Lab3Kalkulator {
                 }
             }
         }
-    };
+    }; // ActionListener dla wszystkich przyciskow operatorow
 
 
     public Lab3Kalkulator() {
@@ -74,130 +81,44 @@ public class Lab3Kalkulator {
         panel.add(wynik);
 
 
-        // b1 - '1'
-        b1 = new JButton("1");
-        b1.setBounds(115, 150, 60, 60);
-        b1.setFont(font);
-        b1.setBackground(lightGreen);
-        panel.add(b1);
-        b1.addActionListener(przyciskCyfry);
+        // buttons[] - przyciski cyfr
+        for(int i = 0; i < 10; i++) {
+            buttons[i] = new JButton(String.valueOf(i));
+            buttons[i].setFont(font);
+            buttons[i].setBackground(lightGreen);
+            buttons[i].addActionListener(przyciskCyfry);
+
+            switch(i) {
+                case 0:
+                    buttons[i].setBounds(xCords[i], 360, 130, 60);
+                    break;
+                case 1, 2, 3:
+                    buttons[i].setBounds(xCords[i], 150, 60, 60);
+                    break;
+                case 4, 5, 6:
+                    buttons[i].setBounds(xCords[i], 220, 60, 60);
+                    break;
+                case 7, 8, 9:
+                    buttons[i].setBounds(xCords[i], 290, 60, 60);
+                    break;
+                default:
+                    JOptionPane.showMessageDialog(frame, "Cos poszlo nie tak", "Error", JOptionPane.ERROR_MESSAGE);
+                    break;
+            }
+
+            panel.add(buttons[i]);
+        }
 
 
-        // b2 - '2'
-        b2 = new JButton("2");
-        b2.setBounds(185, 150, 60, 60);
-        b2.setFont(font);
-        b2.setBackground(lightGreen);
-        panel.add(b2);
-        b2.addActionListener(przyciskCyfry);
-
-
-        // b3 - '3'
-        b3 = new JButton("3");
-        b3.setBounds(255, 150, 60, 60);
-        b3.setFont(font);
-        b3.setBackground(lightGreen);
-        panel.add(b3);
-        b3.addActionListener(przyciskCyfry);
-
-
-        // b4 - '4'
-        b4 = new JButton("4");
-        b4.setBounds(115, 220, 60, 60);
-        b4.setFont(font);
-        b4.setBackground(lightGreen);
-        panel.add(b4);
-        b4.addActionListener(przyciskCyfry);
-
-
-        // b5 - '5'
-        b5 = new JButton("5");
-        b5.setBounds(185, 220, 60, 60);
-        b5.setFont(font);
-        b5.setBackground(lightGreen);
-        panel.add(b5);
-        b5.addActionListener(przyciskCyfry);
-
-
-        // b6 - '6'
-        b6 = new JButton("6");
-        b6.setBounds(255, 220, 60, 60);
-        b6.setFont(font);
-        b6.setBackground(lightGreen);
-        panel.add(b6);
-        b6.addActionListener(przyciskCyfry);
-
-
-        // b7 - '7'
-        b7 = new JButton("7");
-        b7.setBounds(115, 290, 60, 60);
-        b7.setFont(font);
-        b7.setBackground(lightGreen);
-        panel.add(b7);
-        b7.addActionListener(przyciskCyfry);
-
-
-        // b8 - '8'
-        b8 = new JButton("8");
-        b8.setBounds(185, 290, 60, 60);
-        b8.setFont(font);
-        b8.setBackground(lightGreen);
-        panel.add(b8);
-        b8.addActionListener(przyciskCyfry);
-
-
-        // b9 - '9'
-        b9 = new JButton("9");
-        b9.setBounds(255, 290, 60, 60);
-        b9.setFont(font);
-        b9.setBackground(lightGreen);
-        panel.add(b9);
-        b9.addActionListener(przyciskCyfry);
-
-
-        // b0 - '0'
-        b0 = new JButton("0");
-        b0.setBounds(115, 360, 130, 60);
-        b0.setFont(font);
-        b0.setBackground(lightGreen);
-        panel.add(b0);
-        b0.addActionListener(przyciskCyfry);
-
-
-        // plus - '+'
-        plus = new JButton("+");
-        plus.setBounds(325, 150, 60, 60);
-        plus.setFont(font);
-        plus.setBackground(green);
-        panel.add(plus);
-        plus.addActionListener(przyciskOperatory);
-
-
-        // minus - '-'
-        minus = new JButton("-");
-        minus.setBounds(325, 220, 60, 60);
-        minus.setFont(font);
-        minus.setBackground(green);
-        panel.add(minus);
-        minus.addActionListener(przyciskOperatory);
-
-
-        // mnozenie - '*'
-        mnozenie = new JButton("*");
-        mnozenie.setBounds(325, 290, 60, 60);
-        mnozenie.setFont(font);
-        mnozenie.setBackground(green);
-        panel.add(mnozenie);
-        mnozenie.addActionListener(przyciskOperatory);
-
-
-        // dzielenie - '/'
-        dzielenie = new JButton("/");
-        dzielenie.setBounds(325, 360, 60, 60);
-        dzielenie.setFont(font);
-        dzielenie.setBackground(green);
-        panel.add(dzielenie);
-        dzielenie.addActionListener(przyciskOperatory);
+        // operators[] - przyciski operatorow
+        for(int i = 0; i < 4; i++){
+            operators[i] = new JButton(String.valueOf(operatory[i]));
+            operators[i].setFont(font);
+            operators[i].setBackground(green);
+            operators[i].setBounds(325, 150+(i*70), 60, 60);
+            operators[i].addActionListener(przyciskOperatory);
+            panel.add(operators[i]);
+        }
 
 
         // rownaSie - '='
@@ -234,11 +155,13 @@ public class Lab3Kalkulator {
             }
         });
 
-    }
+    } // koniec konstruktora obiektu klasy Lab3Kalkulator
+
 
     public JFrame getFrame() {
         return this.frame;
     }
+
 
     public static void main(String[] args) {
         SwingUtilities.invokeLater(new Runnable() {
@@ -248,4 +171,5 @@ public class Lab3Kalkulator {
             }
         });
     }
+
 }
