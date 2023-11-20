@@ -31,6 +31,7 @@ public class Lab3JFrame {
         jframe = new JFrame("Zadania 1, 2, 5 - Logowanie i sprawdzanie sily hasla");
         jframe.setSize(700, 700);
         jframe.setLocationRelativeTo(null);
+        jframe.setResizable(false);
         jframe.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 
@@ -248,7 +249,7 @@ public class Lab3JFrame {
                 ok.addActionListener(new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
-                        JOptionPane.showMessageDialog(jframe, "Cześć " + imie.getText() + ", milo cie poznac!", "Witaj!", JOptionPane.PLAIN_MESSAGE);
+                        JOptionPane.showMessageDialog(jframe, "Czesc " + imie.getText() + ", milo cie poznac!", "Witaj!", JOptionPane.PLAIN_MESSAGE);
                     }
                 });
             }

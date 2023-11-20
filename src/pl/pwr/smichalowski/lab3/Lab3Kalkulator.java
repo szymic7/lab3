@@ -63,6 +63,7 @@ public class Lab3Kalkulator {
         frame = new JFrame("Zadanie 3 - Prosty kalkulator (liczb calkowitych)");
         frame.setSize(500, 500);
         frame.setLocationRelativeTo(null);
+        frame.setResizable(false);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 
