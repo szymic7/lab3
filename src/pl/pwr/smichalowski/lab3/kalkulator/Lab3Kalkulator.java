@@ -1,4 +1,4 @@
-package pl.pwr.smichalowski.lab3;
+package pl.pwr.smichalowski.lab3.kalkulator;
 
 import javax.swing.*;
 import java.awt.*;
@@ -112,7 +112,7 @@ public class Lab3Kalkulator {
 
 
         // operators[] - przyciski operatorow
-        for(int i = 0; i < 4; i++){
+        for(int i = 0; i < 4; i++) {
             operators[i] = new JButton(String.valueOf(operatory[i]));
             operators[i].setFont(font);
             operators[i].setBackground(green);

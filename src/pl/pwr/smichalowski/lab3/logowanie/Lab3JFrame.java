@@ -1,4 +1,4 @@
-package pl.pwr.smichalowski.lab3;
+package pl.pwr.smichalowski.lab3.logowanie;
 
 import javax.swing.*;
 import java.awt.*;
